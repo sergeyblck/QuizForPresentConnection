@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
 import Quiz from './pages/Quiz';
 import HighScores from './pages/HighScores';
-import './App.css'; // Your custom CSS
+import './App.css';
 
 const App: React.FC = () => {
     return (

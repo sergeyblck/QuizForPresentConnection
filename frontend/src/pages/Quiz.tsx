@@ -30,7 +30,6 @@ const Quiz: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Load quizzes from the API
         const fetchQuizzes = async () => {
             const quizData = await getQuizzes();
             setQuizzes(quizData);
@@ -38,7 +37,6 @@ const Quiz: React.FC = () => {
 
         fetchQuizzes();
 
-        // Check if there's saved state in localStorage
         const savedState = localStorage.getItem('quizState');
         if (savedState) {
             const parsedState = JSON.parse(savedState);
@@ -99,7 +97,6 @@ const Quiz: React.FC = () => {
             setFinalScore(response.score);
             setIsSubmitted(true);
 
-            // Store the state in localStorage
             localStorage.setItem('quizState', JSON.stringify({
                 isSubmitted: true,
                 finalScore: response.score,
@@ -119,7 +116,7 @@ const Quiz: React.FC = () => {
         setEmail('');
         setAnswers({});
         setIsSubmitted(false);
-        localStorage.removeItem('quizState'); // Clear saved state
+        localStorage.removeItem('quizState');
     };
 
     if (isSubmitted) {
