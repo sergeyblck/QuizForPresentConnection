@@ -40,4 +40,4 @@ There are two pages: `Quiz` and `HighScores`, located in the `src/pages` folder.
    ```bash
    npm install
 3. npm start
-4. Open the app in your browser at http://localhost:5173 (port can differ, check the terminal)
+4. Open the app in your browser at `http://localhost:5173` (port can differ, check the terminal)
