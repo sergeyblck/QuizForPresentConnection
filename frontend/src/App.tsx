@@ -1,17 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink } from 'react-router-dom';
-import Quiz from './pages/Quiz'; // Import the Quiz component
-import HighScores from './pages/HighScores'; // Import the HighScores component
+import Quiz from './pages/Quiz';
+import HighScores from './pages/HighScores';
 import './App.css'; // Your custom CSS
 
 const App: React.FC = () => {
     return (
         <Router>
             <div className="app-container">
-                {/* Independent black row for tabs */}
                 <div className="tabs-row">
                     <div className="tabs">
-                        {/* Quiz Tab - NavLink with a className function */}
                         <NavLink
                             to="/"
                             className={({ isActive }) =>
@@ -20,7 +18,6 @@ const App: React.FC = () => {
                         >
                             Quiz
                         </NavLink>
-                        {/* HighScores Tab - NavLink with a className function */}
                         <NavLink
                             to="/highscores"
                             className={({ isActive }) =>
@@ -33,7 +30,6 @@ const App: React.FC = () => {
                 </div>
 
                 <main className="content">
-                    {/* Define the routes for the Quiz and HighScores pages */}
                     <Routes>
                         <Route path="/" element={<Quiz />} />
                         <Route path="/highscores" element={<HighScores />} />

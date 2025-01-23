@@ -2,14 +2,16 @@
 using PresentConnectionInt.Models;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace PresentConnectionInt.Services
 {
     public interface IQuizService
     {
         Task<List<Quiz>> GetQuizzesAsync();
+
         Task SaveHighScoreAsync(HighScore highScore);
+
         Task<int> SubmitQuizAsync(QuizSubmission submission);
+
         Task<List<HighScore>> GetTopHighScoresAsync();
     }
 
@@ -22,17 +24,26 @@ namespace PresentConnectionInt.Services
             _context = context;
         }
 
+        /// <summary>
+        /// Retrieves all quiz records from the database asynchronously.
+        /// </summary>
         public async Task<List<Quiz>> GetQuizzesAsync()
         {
             return await _context.Quizzes.ToListAsync();
         }
 
+        /// <summary>
+        /// Saves a user's score to the high score database asynchronously.
+        /// </summary>
         public async Task SaveHighScoreAsync(HighScore highScore)
         {
             _context.HighScores.Add(highScore);
             await _context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Retrieves the top 10 high scores, ordered by score in descending order.
+        /// </summary>
         public async Task<List<HighScore>> GetTopHighScoresAsync()
         {
             return await _context.HighScores
@@ -40,6 +51,10 @@ namespace PresentConnectionInt.Services
                 .Take(10)
                 .ToListAsync();
         }
+
+        /// <summary>
+        /// Evaluates the quiz based on the user's answers and returns the calculated score.
+        /// </summary>
         public async Task<int> EvaluateQuizAsync(QuizSubmission submission)
         {
             var quizzes = await _context.Quizzes.ToListAsync();
@@ -51,15 +66,12 @@ namespace PresentConnectionInt.Services
                 {
                     if (quiz.Type == "Checkbox")
                     {
-                        // Calculate score for Checkbox type
                         var correctAnswersSet = new HashSet<string>(quiz.CorrectAnswers);
                         var userAnswersSet = new HashSet<string>(userAnswers);
 
-                        // Get the number of correctly checked answers
                         int correctCheckedCount = userAnswersSet.Intersect(correctAnswersSet).Count();
                         int totalCorrectAnswers = correctAnswersSet.Count;
 
-                        // Calculate score for checkbox question
                         if (totalCorrectAnswers > 0)
                         {
                             int points = (int)Math.Ceiling((100.0 / totalCorrectAnswers) * correctCheckedCount);
@@ -68,7 +80,6 @@ namespace PresentConnectionInt.Services
                     }
                     else if (quiz.Type == "Radio")
                     {
-                        // Calculate score for Radio buttons type (correct answer)
                         if (quiz.CorrectAnswers.Contains(userAnswers.FirstOrDefault()))
                         {
                             score += 100;
@@ -76,7 +87,6 @@ namespace PresentConnectionInt.Services
                     }
                     else if (quiz.Type == "Textbox")
                     {
-                        // Calculate score for Textbox type (case-insensitive match)
                         var correctAnswer = quiz.CorrectAnswers.FirstOrDefault();
                         if (!string.IsNullOrEmpty(correctAnswer) && string.Equals(correctAnswer, userAnswers.FirstOrDefault(), StringComparison.OrdinalIgnoreCase))
                         {
@@ -89,7 +99,9 @@ namespace PresentConnectionInt.Services
             return score;
         }
 
-
+        /// <summary>
+        /// Calculates the score, saves the score to the database, and returns it
+        /// </summary>
         public async Task<int> SubmitQuizAsync(QuizSubmission submission)
         {
             var score = await EvaluateQuizAsync(submission);
@@ -105,9 +117,5 @@ namespace PresentConnectionInt.Services
 
             return score;
         }
-
     }
-
-
-
 }

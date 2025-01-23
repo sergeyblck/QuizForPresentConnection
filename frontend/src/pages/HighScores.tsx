@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { getHighScores } from '../services/ApiService';
 import './HighScores.css';
 
@@ -17,9 +17,7 @@ const HighScores: React.FC = () => {
         const fetchScores = async () => {
             try {
                 const scores = await getHighScores();
-                // Sort the scores by 'score' in descending order
-                const sortedScores = scores.sort((a: HighScore, b: HighScore) => b.score - a.score);
-                setHighScores(sortedScores.slice(0, 10)); // Limit to top 10 scores
+                setHighScores(scores);
             } catch (error) {
                 console.error('Error fetching high scores', error);
             }
@@ -27,7 +25,7 @@ const HighScores: React.FC = () => {
         fetchScores();
     }, []);
 
-    const formatDate = (date: string) => new Date(date).toLocaleString(); // Format date
+    const formatDate = (date: string) => new Date(date).toLocaleString();
 
     return (
         <Container className="high-scores-container">
@@ -53,7 +51,7 @@ const HighScores: React.FC = () => {
                         <tr key={score.id}>
                             <td className={rankStyle}>{index + 1}</td>
                             <td className={`email-column ${rankStyle}`}>
-                                <span title={score.email}>{score.email}</span> {/* Tooltip for full email */}
+                                <span title={score.email}>{score.email}</span>
                             </td>
                             <td className={rankStyle}>{score.score}</td>
                             <td className={rankStyle}>{formatDate(score.dateTime)}</td>

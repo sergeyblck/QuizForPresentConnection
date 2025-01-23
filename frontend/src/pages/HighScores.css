@@ -1,7 +1,7 @@
 .high-scores-container {
     padding: 20px;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -16,7 +16,7 @@
 .high-scores-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 10px; /* Add spacing between rows */
+    border-spacing: 0 10px;
 }
 
 .high-scores-table th,
@@ -24,24 +24,24 @@
     padding: 10px;
     text-align: left;
     vertical-align: middle;
-    white-space: nowrap; /* Prevent text from wrapping */
+    white-space: nowrap;
 }
 
 .high-scores-table th.email-column,
 .high-scores-table td.email-column {
-    max-width: 200px; /* Set a fixed width for the email column */
+    max-width: 200px;
     overflow: hidden;
-    text-overflow: ellipsis; /* Show "..." for overflowing text */
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
 
 .high-scores-table td.email-column:hover {
     overflow: visible;
-    white-space: normal; /* Allow wrapping on hover */
+    white-space: normal;
     position: relative;
     z-index: 1;
     background-color: #f5f5f5;
-    border: 1px solid #ddd; /* Add a border to make the tooltip-like expansion look intentional */
+    border: 1px solid #ddd;
 }
 
 .high-scores-table td.email-column span {
@@ -52,34 +52,34 @@
 }
 
 .high-scores-table thead th {
-    background-color: #2c3e50; /* Dark header background */
-    color: #ecf0f1; /* Light text color */
+    background-color: #2c3e50;
+    color: #ecf0f1;
     font-weight: bold;
     padding: 10px;
     text-align: left;
-    border-radius: 5px 5px 0 0; /* Rounded corners for header */
+    border-radius: 5px 5px 0 0;
 }
 
 .high-scores-table tbody tr {
-    transition: transform 0.2s, box-shadow 0.2s; /* Add smooth effects */
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .high-scores-table tbody tr:hover {
-    transform: scale(1.02); /* Slight zoom on hover */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+    transform: scale(1.02);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .high-scores-table td {
     background-color: #ffffff;
     padding: 15px;
-    border-radius: 5px; /* Rounded corners for rows */
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for rows */
+    border-radius: 5px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .high-scores-table td.gold {
     background: linear-gradient(90deg, #ffdf00, #ffe680);
     font-weight: bold;
-    color: #3b3b3b; /* Dark text for contrast */
+    color: #3b3b3b;
 }
 
 .high-scores-table td.silver {

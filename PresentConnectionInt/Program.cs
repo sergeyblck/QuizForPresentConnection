@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PresentConnectionInt.Services;
 using PresentConnectionInt.Data;
-using PresentConnectionInt.Models; // Ensure this matches your namespace for models
+using PresentConnectionInt.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +52,17 @@ using (var scope = app.Services.CreateScope())
 
     context.HighScores.AddRange(new[]
     {
-        new HighScore { Id = 1, Email = "test@example.com", Score = 500, DateTime = DateTime.Now }
+        new HighScore { Id = 1, Email = "test1@example.com", Score = 500, DateTime = new DateTime(2025, 01, 01, 10, 30, 00) },
+        new HighScore { Id = 2, Email = "test2@example.com", Score = 450, DateTime = new DateTime(2025, 01, 02, 12, 45, 00) },
+        new HighScore { Id = 3, Email = "test3@example.com", Score = 400, DateTime = new DateTime(2025, 01, 03, 14, 00, 00) },
+        new HighScore { Id = 4, Email = "test4@example.com", Score = 350, DateTime = new DateTime(2025, 01, 04, 15, 15, 00) },
+        new HighScore { Id = 5, Email = "test5@example.com", Score = 300, DateTime = new DateTime(2025, 01, 05, 16, 30, 00) },
+        new HighScore { Id = 6, Email = "test6@example.com", Score = 250, DateTime = new DateTime(2025, 01, 06, 17, 45, 00) },
+        new HighScore { Id = 7, Email = "test7@example.com", Score = 200, DateTime = new DateTime(2025, 01, 07, 18, 00, 00) },
+        new HighScore { Id = 8, Email = "test8@example.com", Score = 150, DateTime = new DateTime(2025, 01, 08, 19, 15, 00) },
+        new HighScore { Id = 9, Email = "test9@example.com", Score = 100, DateTime = new DateTime(2025, 01, 09, 20, 30, 00) },
+        new HighScore { Id = 10, Email = "test10@example.com", Score = 50, DateTime = new DateTime(2025, 01, 10, 21, 45, 00) }
+
     });
 
     context.SaveChanges();

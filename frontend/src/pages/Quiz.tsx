@@ -30,12 +30,22 @@ const Quiz: React.FC = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Load quizzes from the API
         const fetchQuizzes = async () => {
             const quizData = await getQuizzes();
             setQuizzes(quizData);
         };
 
         fetchQuizzes();
+
+        // Check if there's saved state in localStorage
+        const savedState = localStorage.getItem('quizState');
+        if (savedState) {
+            const parsedState = JSON.parse(savedState);
+            setIsSubmitted(parsedState.isSubmitted);
+            setFinalScore(parsedState.finalScore);
+            setAnswers(parsedState.answers);
+        }
     }, []);
 
     const handleAnswerChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -88,6 +98,13 @@ const Quiz: React.FC = () => {
             console.log('Quiz submitted successfully:', response);
             setFinalScore(response.score);
             setIsSubmitted(true);
+
+            // Store the state in localStorage
+            localStorage.setItem('quizState', JSON.stringify({
+                isSubmitted: true,
+                finalScore: response.score,
+                answers: formData.answers,
+            }));
         } catch (error) {
             console.error('Error submitting quiz:', error);
             alert('There was an error submitting your quiz. Please try again.');
@@ -102,6 +119,7 @@ const Quiz: React.FC = () => {
         setEmail('');
         setAnswers({});
         setIsSubmitted(false);
+        localStorage.removeItem('quizState'); // Clear saved state
     };
 
     if (isSubmitted) {
